@@ -40,11 +40,24 @@
             --black: #000000;
             --white: #FFFFFF;
             --electric-blue: #0066FF;
+            --whatsapp-green: #25D366;
+            --whatsapp-dark: #128C7E;
             --off-white: #F5F5F7;
             --off-black: #121212;
             --medium-grey: #8E8E93;
             --light-grey: #E5E5EA;
             font-size: 16px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 60px rgba(37, 211, 102, 0.6);
+            }
         }
         
         body {
@@ -116,35 +129,55 @@
             width: 100%;
             max-width: 600px;
             margin: 30px auto;
-            padding: 20px 40px;
-            background: var(--electric-blue);
+            padding: 22px 40px;
+            background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-dark) 100%);
             color: var(--white);
             text-align: center;
             text-decoration: none;
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
         }
         
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 60px rgba(37, 211, 102, 0.6);
+            animation: none;
         }
         
         .cta-button:active {
-            transform: translateY(0);
+            transform: translateY(-1px) scale(1);
         }
         
         .countdown {
             display: inline-block;
             font-family: 'Space Grotesk', monospace;
             font-weight: 600;
-            color: var(--electric-blue);
+            color: var(--whatsapp-green);
         }
         
         /* HERO SECTION */
@@ -290,7 +323,7 @@
         
         .solution-item::before {
             content: '✓';
-            color: var(--electric-blue);
+            color: var(--whatsapp-green);
             font-weight: 700;
             font-size: 24px;
             flex-shrink: 0;
@@ -551,7 +584,7 @@
         .guarantee-badge {
             width: 120px;
             height: 120px;
-            border: 4px solid var(--electric-blue);
+            border: 4px solid var(--whatsapp-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -561,6 +594,7 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            animation: pulse 2s infinite;
         }
         
         .guarantee h2 {
@@ -592,18 +626,19 @@
         
         .guarantee-checks div::before {
             content: '✓';
-            color: var(--electric-blue);
+            color: var(--whatsapp-green);
             font-weight: 700;
             font-size: 24px;
             flex-shrink: 0;
         }
         
         .cta-large {
-            height: 70px;
-            font-size: 18px;
+            height: 75px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 800;
         }
         
         /* PRICING */
@@ -679,18 +714,19 @@
         
         .included-list div::before {
             content: '✓';
-            color: var(--electric-blue);
+            color: var(--whatsapp-green);
             font-weight: 700;
             font-size: 20px;
             flex-shrink: 0;
         }
         
         .bonus-section {
-            background: var(--electric-blue);
+            background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-dark) 100%);
             color: var(--white);
             padding: 40px;
             margin: 40px auto;
             max-width: 700px;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.3);
         }
         
         .bonus-section h3 {
@@ -814,15 +850,16 @@
             left: 0;
             right: 0;
             width: 100%;
-            height: 60px;
-            background: var(--electric-blue);
+            height: 65px;
+            background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-dark) 100%);
             z-index: 9999;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 -6px 30px rgba(37, 211, 102, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
             padding: 0 20px;
+            animation: pulse 2s infinite;
         }
         
         .sticky-cta a {
@@ -834,6 +871,11 @@
             flex: 1;
             justify-content: center;
             max-width: 800px;
+            transition: transform 0.2s;
+        }
+        
+        .sticky-cta a:hover {
+            transform: scale(1.05);
         }
         
         .sticky-cta-text {
@@ -893,13 +935,13 @@
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
-            <img src="https://via.placeholder.com/120x40/000000/FFFFFF?text=AI+Creator+Labs" alt="AI Creator Labs" class="logo">
+            <img src="logo-acl.png" alt="AI Creator Labs" class="logo">
             
             <h1>POTONG COST 40% DAN NAIKKAN INCOME BISNIS DENGAN AI</h1>
             
             <p class="subheadline">Workshop Intensif 2 Hari | 19-20 November 2025 | Jambi</p>
             
-            <img src="https://via.placeholder.com/600x800/000000/FFFFFF?text=Workshop+Poster" alt="Workshop AI for Business" class="poster-image" loading="lazy">
+            <img src="poster-workshop.png" alt="Workshop AI for Business" class="poster-image" loading="lazy">
             
             <a href="https://wa.me/6282171175549?text=Halo%20saya%20mau%20daftar%20Workshop%20AI%20Jambi" class="cta-button wa-link">
                 DAFTAR SEKARANG - TERSISA 8 KURSI!
@@ -1076,7 +1118,7 @@
             
             <div class="speakers-grid">
                 <div class="speaker">
-                    <img src="https://via.placeholder.com/200/000000/FFFFFF?text=Sepriansah" alt="Sepriansah" class="speaker-photo" loading="lazy">
+                    <img src="sepriansah.jpg" alt="Sepriansah" class="speaker-photo" loading="lazy">
                     <h3>SEPRIANSAH (RUANGSEPRI)</h3>
                     <h4>CMO of AI Creator Labs</h4>
                     <ul>
@@ -1087,7 +1129,7 @@
                 </div>
                 
                 <div class="speaker">
-                    <img src="https://via.placeholder.com/200/000000/FFFFFF?text=Ricky+Chandra" alt="Ricky Chandra" class="speaker-photo" loading="lazy">
+                    <img src="ricky-chandra.jpg" alt="Ricky Chandra" class="speaker-photo" loading="lazy">
                     <h3>RICKY CHANDRA J.</h3>
                     <h4>CTO of AI Creator Labs</h4>
                     <ul>
@@ -1436,7 +1478,7 @@
     <!-- JavaScript -->
     <script>
         // Countdown Timer
-        const countDownDate = new Date("Nov 12, 2025 23:59:00 GMT+0700").getTime();
+        const countDownDate = new Date("Nov 16, 2025 23:59:00 GMT+0700").getTime();
         
         const x = setInterval(function() {
             const now = new Date().getTime();
